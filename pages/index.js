@@ -17,7 +17,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
     const loadTasks = req.cookies.loadTasks;
 
     // Подключение к базе данных и загрузка задач, если это необходимо
-    if (loadTasks === 'true') {
+    // if (loadTasks === 'true') {
       await dbConnect();
       const tasks = await TaskModel.find({});
       const tasksForProps = tasks.map(doc => {
@@ -29,7 +29,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
       // Добавление задач в Redux store
       store.dispatch(setTasks(tasksForProps));
       return { props: { initialTasks: tasksForProps } };
-    }
+    //}
 
     // Возврат пустых пропсов, если загрузка задач не требуется
     return { props: {} };
@@ -44,13 +44,13 @@ export default function Home({ initialTasks }) {
   // Эффект для инициализации состояния из localStorage или начальных пропсов
   useEffect(() => {
     // Установка куки в зависимости от наличия задач в localStorage
-    if (!localStorage.getItem('tasks')) {
-      console.log("loadTasks=true; path=/");
-      document.cookie = "loadTasks=true; path=/";
-    } else {
-      console.log("loadTasks=false; path=/");
-      document.cookie = "loadTasks=false; path=/";
-    }
+    // if (!localStorage.getItem('tasks')) {
+    //   console.log("loadTasks=true; path=/");
+    //   document.cookie = "loadTasks=true; path=/";
+    // } else {
+    //   console.log("loadTasks=false; path=/");
+    //   document.cookie = "loadTasks=false; path=/";
+    // }
 
     // Загрузка задач из localStorage или из начальных пропсов
     const localTasks = localStorage.getItem('tasks');
